@@ -1,7 +1,6 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-JIRA_CLOUD_INSTANCE="$JIRA_DOMAIN"
 TOKEN=$JIRA_TOKEN
 USERNAME=$JIRA_EMAIL
 TICKET_NUMBER="$1"
@@ -10,7 +9,7 @@ VERSION_NAME="$2"
 
 function update_jira_ticket() {
   # Construct the Jira API URL for the ticket
-  JIRA_API_URL="https://${JIRA_CLOUD_INSTANCE}.atlassian.net/rest/api/2/issue/${TICKET_NUMBER}"
+  JIRA_API_URL="https://${JIRA_DOMAIN}/rest/api/2/issue/${TICKET_NUMBER}"
 
   # Construct the JSON payload for the update request
   JSON_PAYLOAD="{\"update\":{\"fixVersions\":[{\"add\":{\"name\":\"${VERSION_NAME}\"}}]}}"

@@ -102,7 +102,7 @@ function get_next_release_number() {
 
 function get_tickets_in_current_branch() {
   local target_branch="$1"
-  $TICKET_STATUS_PATH . "$target_branch" | grep -v '"Done"' | jq -r .url | sort | uniq | sed 's/https:\/\/'$JIRA_DOMAIN'.atlassian.net\/browse\///g'
+  $TICKET_STATUS_PATH . "$target_branch" | grep -v '"Done"' | jq -r .url | sort | uniq | sed 's/https:\/\/'$JIRA_DOMAIN'\/browse\///g'
 }
 
 function existing_version() {
@@ -139,7 +139,7 @@ for TICKET in $TICKETS; do
     # get the existing version
     existing_version=$(existing_version $TICKET $REPOSITORY-v$NEXT_VERSION)
     if [ "$existing_version" == "" ]; then
-      $NOTIFICATION_SCRIPT "Tag https://$JIRA_DOMAIN.atlassian.net/browse/$TICKET with $REPOSITORY-v$NEXT_VERSION"
+      $NOTIFICATION_SCRIPT "Tag https://$JIRA_DOMAIN/browse/$TICKET with $REPOSITORY-v$NEXT_VERSION"
     fi
   fi
   $CREATE_RELEASE_PATH "$REPOSITORY-v$NEXT_VERSION" "$DESCRIPTION" 2>/dev/null

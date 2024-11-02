@@ -10,10 +10,9 @@ fi
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TOKEN=$JIRA_TOKEN
 USERNAME=$JIRA_EMAIL
-COMPANY=$JIRA_DOMAIN
 
 if [ "$JIRA_URL" == "" ]; then
-  JIRA_URL="https://$COMPANY.atlassian.net/rest/api/3"
+  JIRA_URL="https://$JIRA_DOMAIN/rest/api/3"
 fi
 
 if [ "$JIRA_PROJECT" == "" ]; then
@@ -89,7 +88,7 @@ function create_release() {
   }'
   
   $CURL_PATH --request POST \
-  --url 'https://company.atlassian.net/rest/api/3/version' \
+  --url "https://$JIRA_DOMAIN/rest/api/3/version" \
   -u "$USERNAME:$TOKEN" \
   --header 'Accept: application/json' \
   --header 'Content-Type: application/json' \

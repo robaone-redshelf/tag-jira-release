@@ -41,8 +41,8 @@ function getTicketInfo() {
       -X GET \
       --user ${USERNAME}:${TOKEN} \
       -H "Content-Type: application/json" \
-      "https://${JIRA_DOMAIN}.atlassian.net/rest/api/2/issue/$ticketId" 2>/dev/null)
-     echo -n "\"url\":\"https://${JIRA_DOMAIN}.atlassian.net/browse/$ticketId\",\"status\":\"$(echo $TICKET_INFO | jq -r .fields.status.name)\""
+      "https://${JIRA_DOMAIN}/rest/api/2/issue/$ticketId" 2>/dev/null)
+     echo -n "\"url\":\"https://${JIRA_DOMAIN}/browse/$ticketId\",\"status\":\"$(echo $TICKET_INFO | jq -r .fields.status.name)\""
   fi
 }
 
